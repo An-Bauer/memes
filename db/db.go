@@ -27,6 +27,19 @@ func initDb() *sql.DB {
 	return db
 }
 
+func getAvailability(db *sql.DB, key string) (bool, error) {
+	row := db.QueryRow("SELECT available FROM db.memes WHERE db.memes.key = ?", key)
+
+	var available bool
+	err := row.Scan(&available)
+
+	if err != nil {
+		return false, err
+	}
+
+	return available, nil
+}
+
 func insert(db *sql.DB) {
 	key := "abceih"
 	batch := 1

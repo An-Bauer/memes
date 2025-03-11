@@ -1,7 +1,7 @@
 # Versions
 - 0.1.1 generate version1 QR-codes without mask optimisation ✅ 10.03.25
 - 0.1.2 connect MySQL batabase ✅ 11.03.25
-- 0.1.3 serve memes
+- 0.1.3 serve meme page
 
 # Features
 - batch create blank keys
