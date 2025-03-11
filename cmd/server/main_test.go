@@ -1,8 +1,8 @@
 package main
 
 import (
-	"memes/qrcode"
-	"memes/svg"
+	"memes/code/qrcode"
+	"memes/code/svg"
 	"testing"
 )
 
