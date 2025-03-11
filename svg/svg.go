@@ -16,7 +16,7 @@ func DrawQR(qrcode [21][21]bool, name string) {
 	}
 
 	cell := 10
-	corner := 4
+	corner := 5
 
 	file, err := os.Create(name)
 	if err != nil {

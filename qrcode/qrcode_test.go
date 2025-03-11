@@ -5,7 +5,7 @@ import (
 )
 
 func TestQR(t *testing.T) {
-	matrix, err := CreateQR([]rune("HELLO WORLD"), Q, 6)
+	matrix, err := CreateQR([]rune("hello world"), Q, 6)
 	if err != nil {
 		t.Errorf("%v", err)
 	}
