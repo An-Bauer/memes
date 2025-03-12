@@ -13,19 +13,21 @@ func TestPswd(t *testing.T) {
 }
 
 func TestInit(t *testing.T) {
-	db := initDb()
-	defer db.Close()
+	fmt.Println(DB)
+	InitDb()
+	fmt.Println(DB)
+	defer DB.Close()
 
-	insert(db)
+	insert()
 }
 
 func TestAvailibility(t *testing.T) {
-	db := initDb()
-	defer db.Close()
+	InitDb()
+	defer DB.Close()
 
-	av1, err1 := getAvailability(db, "meme0000")
+	av1, err1 := GetAvailability("meme0000")
 	fmt.Println(av1, err1)
 
-	av2, err2 := getAvailability(db, "abc012")
+	av2, err2 := GetAvailability("abc012")
 	fmt.Println(av2, err2)
 }

@@ -2,12 +2,16 @@ package server
 
 import (
 	"fmt"
+	"memes/code/db"
 	"os"
 	"testing"
 )
 
-func TestInit(t *testing.T) {
-	initServer()
+func TestServer(t *testing.T) {
+	db.InitDb()
+	defer db.DB.Close()
+
+	runServer()
 }
 
 func TestFile(t *testing.T) {
@@ -19,4 +23,9 @@ func TestFile(t *testing.T) {
 	fmt.Println("jo")
 	fmt.Println(info, err)
 
+}
+
+func TestJoin(t *testing.T) {
+	path, err := safeJoin("E:/InProgress/memes/images", "../test")
+	fmt.Println(path, err)
 }
