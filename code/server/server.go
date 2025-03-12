@@ -7,19 +7,23 @@ import (
 	"path/filepath"
 )
 
-func runServer() {
+func RunServer() {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("GET /", handleRoot)
-	mux.HandleFunc("GET /{key}", handleMeme)
-	mux.HandleFunc("GET /img/{key}", handleImage)
+	mux.HandleFunc("/", handleRoot)
+	mux.HandleFunc("GET /{key}", handleMemeGet)
+	mux.HandleFunc("POST /{key}", handleMemePost)
 	mux.HandleFunc("GET /favicon.ico", handleIcon)
+
+	//mux.HandleFunc("GET /img/{key}", handleImage)
+	//mux.HandleFunc("POST /upload", handleUpload)
+	//mux.HandleFunc("GET /upload", handlePostUpload)
 
 	http.ListenAndServe(":8080", mux)
 }
 
 func handleRoot(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("handle root")
+	fmt.Printf("handle root (%s)\n", r.URL.Path)
 
 	fmt.Fprint(w, "main page")
 }
@@ -74,4 +78,12 @@ func handleImage(w http.ResponseWriter, r *http.Request) {
 func handleIcon(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("handle icon")
 	w.WriteHeader(http.StatusBadRequest)
+}
+
+func handleUpload(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(r.PostFormValue("url"))
+}
+
+func handlePostUpload(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "danke!")
 }

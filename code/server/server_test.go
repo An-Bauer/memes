@@ -7,11 +7,15 @@ import (
 	"testing"
 )
 
+func TestServerOnlu(t *testing.T) {
+	RunServer()
+}
+
 func TestServer(t *testing.T) {
 	db.InitDb()
 	defer db.DB.Close()
 
-	runServer()
+	RunServer()
 }
 
 func TestFile(t *testing.T) {
