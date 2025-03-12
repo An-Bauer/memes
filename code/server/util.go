@@ -6,22 +6,20 @@ import (
 	"strings"
 )
 
-func safeJoin(basePath, path string) (string, error) {
-	joinedPath := filepath.Join(basePath, path)
-
+func checkPath(basePath, path string) error {
 	absBasePath, err := filepath.Abs(basePath)
 	if err != nil {
-		return "", err
+		return err
 	}
 
-	absJoinedPath, err := filepath.Abs(joinedPath)
+	absPath, err := filepath.Abs(path)
 	if err != nil {
-		return "", err
+		return err
 	}
 
-	if !strings.HasPrefix(absJoinedPath, absBasePath) {
-		return "", fmt.Errorf("user tries to escape the base directory (%s)", path)
+	if !strings.HasPrefix(absPath, absBasePath) {
+		return fmt.Errorf("user tries to escape the base directory (%s)", path)
 	}
 
-	return joinedPath, nil
+	return nil
 }

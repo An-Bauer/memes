@@ -24,8 +24,3 @@ func TestFile(t *testing.T) {
 	fmt.Println(info, err)
 
 }
-
-func TestJoin(t *testing.T) {
-	path, err := safeJoin("E:/InProgress/memes/images", "../test")
-	fmt.Println(path, err)
-}
