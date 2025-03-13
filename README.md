@@ -15,6 +15,7 @@
 - create baked keys
 - time restricted saving
 - mask optimisation
+- meme upload preview serverless
 
 ### Versions
 - 0.1.1 generate version1 QR-codes without mask optimisation ✅ 10.03.25

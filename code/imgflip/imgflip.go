@@ -7,6 +7,10 @@ import (
 	"os"
 )
 
+func DownloadImag(imgflipKey string) error {
+	return fmt.Errorf("not implemented")
+}
+
 func load() error {
 	url := "https://i.imgflip.com/9n6n6z.jpg"
 	filename := "image.jpg"

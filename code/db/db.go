@@ -27,7 +27,26 @@ func InitDb() {
 		panic(err.Error())
 	}
 
-	fmt.Println("succesfully connected to db!")
+	fmt.Println("LOG: succesfully connected to db")
+}
+
+func GetStatus(key string) (int, error) {
+	row := DB.QueryRow("SELECT status FROM db.memes WHERE db.memes.key = ?", key)
+
+	var status int
+	err := row.Scan(&status)
+
+	if err != nil {
+		return 0, err
+	}
+
+	return status, nil
+}
+
+func UpdateStatus(key string, status int) error {
+	kp, err := DB.Exec("UPDATE db.memes SET db.memes.status = ? WHERE (bd.memes.key = ?);", status, key)
+	fmt.Println("DEBUG: ", kp)
+	return err
 }
 
 func GetAvailability(key string) (bool, error) {
