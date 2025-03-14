@@ -15,6 +15,11 @@ func handleIcon(w http.ResponseWriter, r *http.Request) {
 	fmt.Print("LOG: served icon\n")
 }
 
+func handleCSS(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("LOG: served css")
+	http.ServeFile(w, r, "E:/InProgress/memes/web/output.css")
+}
+
 func handleImage(w http.ResponseWriter, r *http.Request) {
 	key := r.PathValue("key")
 

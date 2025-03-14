@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@theme {
+  --color-back1: hsl(264, 80%, 10%);
+  --color-back2: hsl(264, 80%, 20%);
+  --color-front1: hsl(264, 80%, 80%);
+
+  --color-prime: #20164b;
+  --color-second: #e7b196;
+  --color-accent: #f3d74f;
+  /* pink: #c409d8 */
+}

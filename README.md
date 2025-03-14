@@ -1,18 +1,14 @@
 # Memes
 
 ### ToDo
-- batch create blank keys
-- meme creation
-- baking keys
 - website styling
-- save memes
-- comments
-- feedback
 - event logging
+
+- batch create blank keys
+- feedback
 - clone meme
 - block meme
 - users
-- create baked keys
 - time restricted saving
 - mask optimisation
 - meme upload preview serverless
@@ -22,3 +18,4 @@
 - 0.1.2 connect MySQL batabase ✅ 11.03.25
 - 0.1.3 serve very basic meme page ✅ 12.03.25
 - 0.1.4 meme upload ✅ 14.03.25
+- 0.1.5 website styling

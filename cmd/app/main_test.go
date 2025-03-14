@@ -9,12 +9,12 @@ import (
 )
 
 func TestDraw(t *testing.T) {
-	matrix, err := qrcode.CreateQR([]rune("google.de"), qrcode.Q, 6)
+	matrix, err := qrcode.CreateQR([]rune("192.168.178.53:8/meme0002"), qrcode.L, 6)
 	if err != nil {
 		t.Errorf("%v", err)
 	}
 
-	svg.DrawQR(matrix, "test.svg")
+	svg.DrawQR(matrix, "meme0002.svg")
 }
 
 func TestServer(t *testing.T) {
