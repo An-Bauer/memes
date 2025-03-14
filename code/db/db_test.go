@@ -31,3 +31,11 @@ func TestAvailibility(t *testing.T) {
 	av2, err2 := GetAvailability("abc012")
 	fmt.Println(av2, err2)
 }
+
+func TestUpdateStatus(t *testing.T) {
+	InitDb()
+	defer DB.Close()
+
+	fmt.Println(UpdateStatus("meme0000", 1))
+
+}

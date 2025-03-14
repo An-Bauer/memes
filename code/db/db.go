@@ -44,9 +44,18 @@ func GetStatus(key string) (int, error) {
 }
 
 func UpdateStatus(key string, status int) error {
-	kp, err := DB.Exec("UPDATE db.memes SET db.memes.status = ? WHERE (bd.memes.key = ?);", status, key)
-	fmt.Println("DEBUG: ", kp)
-	return err
+	res, err := DB.Exec("UPDATE db.memes SET db.memes.status = ? WHERE (db.memes.key = ?);", status, key)
+	if err != nil {
+		return err
+	}
+	nRows, err := res.RowsAffected()
+	if err != nil {
+		return err
+	}
+	if nRows != 1 {
+		return fmt.Errorf("update status did not update exactly one row (rows:%d)", nRows)
+	}
+	return nil
 }
 
 func GetAvailability(key string) (bool, error) {

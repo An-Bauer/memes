@@ -7,6 +7,13 @@ import (
 	"strings"
 )
 
+func serveTemplate(w http.ResponseWriter, tmpl, key string) {
+	err := templates.ExecuteTemplate(w, tmpl+".html", key)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
 func secureFileServer(w http.ResponseWriter, r *http.Request, basePath, relPath string) {
 	path := filepath.Join(basePath, relPath)
 

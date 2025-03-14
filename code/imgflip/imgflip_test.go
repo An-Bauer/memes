@@ -1,11 +1,9 @@
 package imgflip
 
 import (
-	"fmt"
 	"testing"
 )
 
-func TestLoad(t *testing.T) {
-	fmt.Println(load())
-
+func TestDownload(t *testing.T) {
+	DownloadImag("9nb5hy", "meme0002")
 }

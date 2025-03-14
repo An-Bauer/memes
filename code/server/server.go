@@ -2,7 +2,12 @@ package server
 
 import (
 	"net/http"
+	"text/template"
 )
+
+var templates = template.Must(template.ParseFiles(
+	"E:/InProgress/memes/web/meme.html",
+))
 
 func RunServer() {
 	mux := http.NewServeMux()

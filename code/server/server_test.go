@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func TestServerOnlu(t *testing.T) {
+func TestServerNoDb(t *testing.T) {
 	RunServer()
 }
 
@@ -27,4 +27,8 @@ func TestFile(t *testing.T) {
 	fmt.Println("jo")
 	fmt.Println(info, err)
 
+}
+
+func TestTemplate(t *testing.T) {
+	fmt.Println(templates)
 }

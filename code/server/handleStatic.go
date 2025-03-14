@@ -27,15 +27,15 @@ func handleImage(w http.ResponseWriter, r *http.Request) {
 
 	switch status {
 	case 0:
-		fmt.Printf("SUS: someone tried to access blank meme image (key:%s)\n", key)
+		fmt.Printf("SUS: someone tried to access blank image (key:%s)\n", key)
 		fmt.Fprint(w, "meme not yet uploaded")
 	case 1:
 		fmt.Printf("LOG: served image (key:%s)\n", key)
 
 		base := "E:/InProgress/memes/images"
-		secureFileServer(w, r, base, key+".png")
+		secureFileServer(w, r, base, key+".jpg")
 	case 2:
-		fmt.Printf("SUS: someone tried to access blocked meme image (key:%s)\n", key)
+		fmt.Printf("SUS: someone tried to access blocked image (key:%s)\n", key)
 		w.WriteHeader(http.StatusBadRequest)
 	default:
 		fmt.Printf("ERROR: got invalid status while serving image (key:%s,status:%d)\n", key, status)
