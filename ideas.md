@@ -1,19 +1,10 @@
 # ideen für slogen
 
-verknüpfe dein meme mit einem ... sticker
-und mach die welt ein bisschen bunter
-
-verknüpfe dein meme mit einem ... sticker
-und mach die welt ein bisschen lustiger
-
-verknüpfe dein meme mit einem ... sticker
-und bring die welt zum schmunzeln
-
 mach mit deinem meme die welt ein bisschen bunter
 
 mach die welt ein bisschen bunter
 
-mach die welt ein bisschen bunter
+mach die welt bunter
 
 
 # features
@@ -32,12 +23,13 @@ mach die welt ein bisschen bunter
         - memes published lat at night are more dificult
     - maby trading, probably not
     - youre place in line is what is valuable because it is limeted
+    - you may comment the meme you collected with one emoji next to your name
 
 - maby
     - comments
     - list of collectors in cronological order 
     - sammler, einsammeln, sammlung
-    - everyone has one comment next to their name in list
+    - everyone has one comment next to their name in list, emoji
     - ev. can't change comment -> only when recollect, prob. not
     - no comment means annonymouse collection
     - gets cool when meme gets big
@@ -48,3 +40,8 @@ mach die welt ein bisschen bunter
         - so you see the early collector, yourself, and how many collectors there are, and see some action/ new people collecting -> needs ws
     - or you allways see yourself and collectors count
     - realy important to enumerte the list
+
+- marketing
+    - max
+    - very small sticker, fab in uni
+    - very big sticker, see from space (on maps)

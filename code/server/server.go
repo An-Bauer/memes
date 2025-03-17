@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"net/http"
 	"text/template"
 )
@@ -16,38 +17,19 @@ func RunServer() {
 	mux.HandleFunc("GET /{key}", handleMemeGet)   // upload page | meme page | blocked page
 	mux.HandleFunc("POST /{key}", handleMemePost) // upload imgflip url -> meme page | error
 
-	//http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("E:/InProgress/memes/web"))))
-	mux.HandleFunc("/static/output.css", handleCSS)
 	mux.HandleFunc("GET /img/{key}", handleImage)  // serve image | errror
 	mux.HandleFunc("GET /favicon.ico", handleIcon) // icon
 
-	http.ListenAndServe("192.168.178.53:8", mux)
+	mux.HandleFunc("GET /web/{file}", handleStatic)
+	mux.HandleFunc("POST /api/register", handleRegister)
+	mux.HandleFunc("POST /api/login", handleLogin)
+	//http.ListenAndServe("192.168.178.53:8", mux)
+	http.ListenAndServe("127.0.0.1:3000", mux)
 }
 
-//func handleMeme(w http.ResponseWriter, r *http.Request) {
-//key := r.PathValue("key")
-//fmt.Printf("handle meme (key:%s)\n", key)
+func handleStatic(w http.ResponseWriter, r *http.Request) {
+	file := r.PathValue("file")
+	fmt.Printf("LOG: handeling static (file:%s, )\n", file)
 
-//path := "E:/InProgress/memes/web/index.html"
-
-//available, err := db.GetAvailability(key)
-//if err != nil {
-//w.WriteHeader(http.StatusBadRequest)
-//fmt.Println(err)
-//return
-//}
-//if !available {
-//fmt.Fprint(w, "site not available")
-//return
-//}
-
-//http.ServeFile(w, r, path)
-//}
-
-//func handleUpload(w http.ResponseWriter, r *http.Request) {
-//fmt.Println(r.PostFormValue("url"))
-//}
-
-//func handlePostUpload(w http.ResponseWriter, r *http.Request) {
-//fmt.Fprint(w, "danke!")
-//}
+	secureFileServer(w, r, "E:/InProgress/memes/web", file)
+}

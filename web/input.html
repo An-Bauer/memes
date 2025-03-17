@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="output.css">
+    <script defer src="account.js"></script>
+    <title>Document</title>
+    <style>
+    </style>
+</head>
+
+<body class="bg-prime">
+    test
+
+    <div class="fixed top-0 right-0 h-screen w-screen  flex  justify-center items-center backdrop-blur-xs">
+        <div class=" w-90 bg-prime border rounded-xl border-accent p-2" open>
+            <div id="register" class=" flex flex-col">
+                <input id="regUsername" class="border rounded-md border-accent m-1 p-3 text-accent " type="text"
+                    placeholder="Benutzername">
+                <input id="regPassword1" class="border rounded-md border-accent m-1 p-3 text-accent " type="text"
+                    placeholder="Passwort">
+                <input id="regPassword2" class="border rounded-md border-accent m-1 p-3 text-accent " type="text"
+                    placeholder="Passwort" class="">
+                <div id="regMsg" class="text-accent text-center  "></div>
+                <button id="regBut"
+                    class="m-1 p-3 bg-accent text-prime rounded-md  disabled:bg-prime disabled:text-accent border-accent border"
+                    disabled>registrieren</button>
+            </div>
+
+            <div class=" text-center p-3 text-accent">oder</div>
+
+            <div id="login" class=" flex flex-col">
+                <input id="logUsername" class="border rounded-md border-accent m-1 p-3 text-accent " type="text"
+                    placeholder="Benutzername">
+                <input id="logPassword" class="border rounded-md border-accent m-1 p-3 text-accent " type="text"
+                    placeholder="Passwort">
+                <div id="logMsg"></div>
+                <button id="logBut"
+                    class="m-1 p-3 bg-accent text-prime rounded-md  disabled:bg-prime disabled:text-accent border-accent border"
+                    disabled>einloggen</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

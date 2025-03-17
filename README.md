@@ -3,15 +3,13 @@
 ### ToDo
 - website styling
 - event logging
-
+- users
 - batch create blank keys
 - feedback
-- clone meme
-- block meme
-- users
 - time restricted saving
 - mask optimisation
-- meme upload preview serverless
+- fix upload race condition
+- ajax register get usernam available
 
 ### Versions
 - 0.1.1 generate version1 QR-codes without mask optimisation ✅ 10.03.25

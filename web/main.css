@@ -12,4 +12,9 @@
   /*
   --color-second: #e7b196;
  */
+
+}
+
+.wrong {
+  @apply bg-red-500;
 }

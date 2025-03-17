@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin')
+
 module.exports = {
   content: ["./web/**/*.{html,js}"],
   purge: [],
@@ -8,5 +10,9 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addVariant }) {
+      addVariant('bla', '&.bla');
+    }),
+  ],
 }
