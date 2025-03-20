@@ -1,16 +1,9 @@
 package server
 
 import (
-	"errors"
 	"fmt"
-	"log"
 	"net/http"
-	"text/template"
 )
-
-var templates = template.Must(template.ParseFiles(
-	"E:/InProgress/memes/web/meme.html",
-))
 
 func RunServer() {
 	mux := http.NewServeMux()
@@ -35,36 +28,36 @@ func RunServer() {
 	}
 }
 
-func handleSetCookie(w http.ResponseWriter, r *http.Request) {
-	cookie := http.Cookie{
-		Name:  "test",
-		Value: "bla",
+//func handleSetCookie(w http.ResponseWriter, r *http.Request) {
+//cookie := http.Cookie{
+//Name:  "test",
+//Value: "bla",
 
-		//for security
-		HttpOnly: true,
-		SameSite: http.SameSiteStrictMode,
-		//MaxAge:   30 * 24 * 3600,
-		//Secure:   true,
-	}
+////for security
+//HttpOnly: true,
+//SameSite: http.SameSiteStrictMode,
+////MaxAge:   30 * 24 * 3600,
+////Secure:   true,
+//}
 
-	http.SetCookie(w, &cookie)
+//http.SetCookie(w, &cookie)
 
-	// Write a HTTP response as normal.
-	fmt.Fprint(w, "test")
-}
+//// Write a HTTP response as normal.
+//fmt.Fprint(w, "test")
+//}
 
-func handleGetCookie(w http.ResponseWriter, r *http.Request) {
-	cookie, err := r.Cookie("test")
-	if err != nil {
-		switch {
-		case errors.Is(err, http.ErrNoCookie):
-			http.Error(w, "cookie not found", http.StatusBadRequest)
-		default:
-			log.Println(err)
-			http.Error(w, "server error", http.StatusInternalServerError)
-		}
-		return
-	}
+//func handleGetCookie(w http.ResponseWriter, r *http.Request) {
+//cookie, err := r.Cookie("test")
+//if err != nil {
+//switch {
+//case errors.Is(err, http.ErrNoCookie):
+//http.Error(w, "cookie not found", http.StatusBadRequest)
+//default:
+//log.Println(err)
+//http.Error(w, "server error", http.StatusInternalServerError)
+//}
+//return
+//}
 
-	fmt.Println("cookie: ", cookie.Value)
-}
+//fmt.Println("cookie: ", cookie.Value)
+//}

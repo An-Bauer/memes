@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-func SetToken(username string, w http.ResponseWriter) error {
+func HandleNewToken(username string, w http.ResponseWriter) error {
 	token, err := encode.RandomeString(20)
 	if err != nil {
 		return err

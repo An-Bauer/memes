@@ -5,8 +5,6 @@ import (
 	"memes/code/db"
 	"memes/code/users"
 	"net/http"
-
-	"golang.org/x/crypto/bcrypt"
 )
 
 func handleRegister(w http.ResponseWriter, r *http.Request) {
@@ -14,26 +12,30 @@ func handleRegister(w http.ResponseWriter, r *http.Request) {
 	username := r.PostFormValue("user")
 	password := r.PostFormValue("password")
 
-	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	exists, err := db.CheckUserExistance(username)
 	if err != nil {
-		fmt.Printf("ERROR: hashing password failed (username:%s, password:%s, error: %v)\n", username, password, err)
+		fmt.Printf("ERROR: %v", err)
+		return
+	}
+	if exists {
+		fmt.Fprint(w, "user already exists")
+		fmt.Printf("DEBUG: user already exists")
 		return
 	}
 
-	err = db.AddUser(username, hash)
+	err = users.RegisterUser(username, password)
 	if err != nil {
-		fmt.Printf("ERROR: adding user failed (username:%s, password:%s, error: %v)\n", username, password, err)
+		fmt.Printf("ERROR: %v", err)
 		return
 	}
 
-	err = users.SetToken(username, w)
+	err = users.HandleNewToken(username, w)
 	if err != nil {
-		fmt.Printf("ERROR: setting token failed at register (username:%s, password:%s, error: %v)\n", username, password, err)
+		fmt.Printf("ERROR: %v", err)
 		return
 	}
 
 	fmt.Printf("LOG: handeled register (username:%s, password:%s)\n", username, password)
-
 	fmt.Fprint(w, "jo") // important
 }
 
@@ -41,24 +43,29 @@ func handleLogin(w http.ResponseWriter, r *http.Request) {
 	username := r.PostFormValue("user")
 	password := r.PostFormValue("password")
 
-	hash, err := db.GetHash(username)
+	exists, err := db.CheckUserExistance(username)
 	if err != nil {
-		fmt.Printf("ERROR: getting hash failed (username:%s, password:%s, error: %v)\n", username, password, err)
+		fmt.Printf("ERROR: %v", err)
+		return
+	}
+	if !exists {
+		fmt.Fprint(w, "user doesn't exist")
+		fmt.Printf("DEBUG: user doesn't exists")
 		return
 	}
 
-	err = bcrypt.CompareHashAndPassword(hash, []byte(password))
+	err = users.LoginUser(username, password)
 	if err != nil {
-		fmt.Printf("ERROR: validating hash failed (username:%s, password:%s, error: %v)\n", username, password, err)
+		fmt.Printf("ERROR: %v", err)
 		return
 	}
 
-	err = users.SetToken(username, w)
+	err = users.HandleNewToken(username, w)
 	if err != nil {
-		fmt.Printf("ERROR: setting token failed at login (username:%s, password:%s, error: %v)\n", username, password, err)
+		fmt.Printf("ERROR: %v", err)
 		return
 	}
 
-	fmt.Printf("LOG: handeled login (username:%s, password:%s)\n", username, password)
+	fmt.Printf("LOG: handeled login (username:%s)\n", username)
 	fmt.Fprint(w, "test") // important
 }
