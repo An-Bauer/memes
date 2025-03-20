@@ -3,7 +3,7 @@ package qrcode
 import "fmt"
 
 func CreateQR(content []rune, eccLevel EccLevel, mask int) (Matrix, error) {
-	bits, err := encode(content, eccLevel)
+	bits, err := Encode(content, eccLevel)
 	if err != nil {
 		return Matrix{}, err
 	}

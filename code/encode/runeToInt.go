@@ -1,51 +1,8 @@
-package qrcode
+package encode
 
-import (
-	"fmt"
-)
+import "fmt"
 
-func encodeChars(text []rune) ([]bool, error) {
-	bits := make([]bool, 0)
-
-	for i := range len(text) / 2 {
-		n1, err := runeToInt(text[2*i])
-		if err != nil {
-			return []bool{}, err
-		}
-
-		n2, err := runeToInt(text[2*i+1])
-		if err != nil {
-			return []bool{}, err
-		}
-
-		n := 45*n1 + n2
-
-		bits = append(bits, intToBoolSlice(n, 11)...)
-	}
-
-	if len(text)%2 == 1 {
-		n, err := runeToInt(text[len(text)-1])
-		if err != nil {
-			return []bool{}, err
-		}
-
-		bits = append(bits, intToBoolSlice(n, 6)...)
-	}
-
-	return bits, nil
-}
-
-func intToBoolSlice(num, n int) []bool {
-	bits := make([]bool, 0, n)
-
-	for j := range n {
-		bits = append(bits, (num/(1<<(n-1-j)))%2 == 1)
-	}
-
-	return bits
-}
-
-func runeToInt(r rune) (int, error) {
+func RuneToInt(r rune) (int, error) {
 	switch r {
 	case '0':
 		return 0, nil
@@ -137,7 +94,7 @@ func runeToInt(r rune) (int, error) {
 		return 43, nil
 	case ':':
 		return 44, nil
+	default:
+		return 0, fmt.Errorf("can't convert %q to int", r)
 	}
-
-	return 0, fmt.Errorf("illegal rune: %q", r)
 }

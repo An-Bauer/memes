@@ -2,12 +2,13 @@ package qrcode
 
 import (
 	"fmt"
+	"memes/code/encode"
 
 	"github.com/skip2/go-qrcode/bitset"
 	reedsolomon "github.com/skip2/go-qrcode/reedsolomon"
 )
 
-func encode(text []rune, eccLevel EccLevel) ([]bool, error) {
+func Encode(text []rune, eccLevel EccLevel) ([]bool, error) {
 	capacity, err := dataCapacity(eccLevel)
 	if err != nil {
 		return []bool{}, err
@@ -15,10 +16,10 @@ func encode(text []rune, eccLevel EccLevel) ([]bool, error) {
 
 	bits := make([]bool, 0, capacity*8)
 
-	bits = append(bits, false, false, true, false)       // mode alphanumeric
-	bits = append(bits, intToBoolSlice(len(text), 9)...) // count
+	bits = append(bits, false, false, true, false)              // mode alphanumeric
+	bits = append(bits, encode.IntToBoolSlice(len(text), 9)...) // count
 
-	data, err := encodeChars(text) // data
+	data, err := encode.EncodeChars(text) // data
 	if err != nil {
 		return []bool{}, err
 	}

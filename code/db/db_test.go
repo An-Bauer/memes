@@ -39,3 +39,9 @@ func TestUpdateStatus(t *testing.T) {
 	fmt.Println(UpdateStatus("meme0000", 1))
 
 }
+
+func TestGetHash(t *testing.T) {
+	InitDb()
+	defer DB.Close()
+	fmt.Println(GetHash("anton"))
+}

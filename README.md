@@ -10,6 +10,8 @@
 - mask optimisation
 - fix upload race condition
 - ajax register get usernam available
+- token expiry in db
+- renow token
 
 ### Versions
 - 0.1.1 generate version1 QR-codes without mask optimisation ✅ 10.03.25

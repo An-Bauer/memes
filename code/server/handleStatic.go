@@ -3,6 +3,7 @@ package server
 import (
 	"fmt"
 	"memes/code/db"
+	"memes/code/users"
 	"net/http"
 )
 
@@ -15,10 +16,19 @@ func handleIcon(w http.ResponseWriter, r *http.Request) {
 	fmt.Print("LOG: served icon\n")
 }
 
-func handleCSS(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("LOG: served css")
-	http.ServeFile(w, r, "E:/InProgress/memes/web/output.css")
+func handleStatic(w http.ResponseWriter, r *http.Request) {
+	valid, username, err := users.CheckToken(r)
+	fmt.Println(valid, username, err)
+	file := r.PathValue("file")
+	fmt.Printf("LOG: handeling static (file:%s)\n", file)
+
+	secureFileServer(w, r, "E:/InProgress/memes/web", file)
 }
+
+//func handleCSS(w http.ResponseWriter, r *http.Request) {
+//fmt.Println("LOG: served css")
+//http.ServeFile(w, r, "E:/InProgress/memes/web/output.css")
+//}
 
 func handleImage(w http.ResponseWriter, r *http.Request) {
 	key := r.PathValue("key")

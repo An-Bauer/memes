@@ -112,3 +112,13 @@ function logFunc(e) {
         .catch(error => console.error("Error:", error));
 
 } document.getElementById("logBut").addEventListener("click", logFunc)
+
+function closeAccount(e) {
+    if (e.target == this) {
+        document.getElementById("bgAccount").hidden = true
+    }
+} document.getElementById("bgAccount").addEventListener("click", closeAccount)
+
+function showAccount(e) {
+    document.getElementById("bgAccount").hidden = false
+} document.getElementById("account").addEventListener("click", showAccount)
