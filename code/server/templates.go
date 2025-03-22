@@ -11,7 +11,7 @@ type memePage struct {
 }
 
 var templates = template.Must(template.ParseFiles(
-	"E:/InProgress/memes/web/meme.html",
+	"E:/InProgress/memes/web/meme3.html",
 ))
 
 func serveTemplate(w http.ResponseWriter, tmpl, key string) {

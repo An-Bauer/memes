@@ -21,3 +21,13 @@
 .shadow {
   text-shadow: 3px 3px #c409d8;
 }
+
+.noshadow {
+  text-shadow: 0px 0px #fff;
+  position: relative;
+  top: 3px;
+}
+
+.boxshadow {
+  box-shadow: 3px 3px #c412d8;
+}

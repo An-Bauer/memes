@@ -22,7 +22,7 @@ func handleMemeGet(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "E:/InProgress/memes/web/upload.html")
 	case 1: // baked key
 		fmt.Printf("LOG: serving meme (key:%s)\n", key)
-		serveTemplate(w, "meme", key)
+		serveTemplate(w, "meme3", key)
 	case 2: // blocked key
 		fmt.Printf("LOG: serving blocked (key:%s)\n", key)
 		http.ServeFile(w, r, "E:/InProgress/memes/web/blocked.html")

@@ -1,8 +1,6 @@
 package main
 
 import (
-	"crypto/rand"
-	"fmt"
 	"memes/code/db"
 	"memes/code/qrcode"
 	"memes/code/server"
@@ -24,10 +22,4 @@ func TestServer(t *testing.T) {
 	defer db.DB.Close()
 
 	server.RunServer()
-}
-
-func TestRand(t *testing.T) {
-	for range 100 {
-		fmt.Println(rand.Text())
-	}
 }

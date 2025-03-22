@@ -15,6 +15,7 @@ func handleRegister(w http.ResponseWriter, r *http.Request) {
 	exists, err := db.CheckUserExistance(username)
 	if err != nil {
 		fmt.Printf("ERROR: %v", err)
+		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 	if exists {
@@ -26,17 +27,19 @@ func handleRegister(w http.ResponseWriter, r *http.Request) {
 	err = users.RegisterUser(username, password)
 	if err != nil {
 		fmt.Printf("ERROR: %v", err)
+		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 
 	err = users.HandleNewToken(username, w)
 	if err != nil {
 		fmt.Printf("ERROR: %v", err)
+		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 
 	fmt.Printf("LOG: handeled register (username:%s, password:%s)\n", username, password)
-	fmt.Fprint(w, "jo") // important
+	fmt.Fprint(w, "success")
 }
 
 func handleLogin(w http.ResponseWriter, r *http.Request) {
@@ -46,27 +49,34 @@ func handleLogin(w http.ResponseWriter, r *http.Request) {
 	exists, err := db.CheckUserExistance(username)
 	if err != nil {
 		fmt.Printf("ERROR: %v", err)
+		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 	if !exists {
-		fmt.Fprint(w, "user doesn't exist")
-		fmt.Printf("DEBUG: user doesn't exists")
+		fmt.Fprint(w, "user dosn't exist")
+		fmt.Printf("DEBUG: user dosn't exist")
 		return
 	}
 
-	err = users.LoginUser(username, password)
+	correct, err := users.LoginUser(username, password)
 	if err != nil {
 		fmt.Printf("ERROR: %v", err)
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	if !correct {
+		fmt.Fprint(w, "wrong password")
+		fmt.Printf("DEBUG: wrong password")
 		return
 	}
 
 	err = users.HandleNewToken(username, w)
 	if err != nil {
 		fmt.Printf("ERROR: %v", err)
+		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 
 	fmt.Printf("LOG: handeled login (username:%s)\n", username)
-	http.ServeFile(w, r, "E:/InProgress/memes/web/upload.html")
-	//fmt.Fprint(w, "test") // important
+	fmt.Fprint(w, "success")
 }

@@ -4,7 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--
     <link rel="stylesheet" href="output.css">
+    -->
+    <script defer src="web/account.js"></script>
+    <link rel="stylesheet" href="web/output.css">
     <title>Document</title>
 </head>
 
@@ -15,9 +19,9 @@
 
         <div class="grow"></div>
 
-        <div
-            class=" bg-white border-2 border-accent  rounded-2xl p-3 my-4 font-bold text-prime tracking-wider h-fit w-fit ">
-            ACCOUNT</div>
+        <div id="account"
+            class=" bg-white border-2 border-accent  rounded-2xl p-2.5 my-4 font-bold text-prime tracking-wider h-fit w-fit ">
+            Anmelden</div>
 
         <div id="menu" class=" text-white my-3.5 m-2 ">
             <svg class=" h-13 w-10 p-2" fill="currentColor" viewBox="0 0 4 15">
@@ -28,22 +32,27 @@
 
     </div>
 
-    <div class=" w-fil h-4/5  px-6 py-4 flex justify-center">
-        <img id="meme" src="meme0000.jpg" alt="meme" class=" rounded-xl  ">
-    </div>
-
-
-
-    <div id="desc" class="flex items-end justify-end ">
-        <div class=" flex items-end my-2 mx-6  border-white ">
-            <div id="emoji" class="  text-4xl">🥸</div>
-            <div id="name" class="  ml-1 text-white text-2xl">emil6969🔥</div>
+    <div class=" w-fil h-4/5  px-6 py-4 flex justify-center  ">
+        <div>
+            <!--
+            <img id="meme" src="meme0000.jpg" alt="meme" class=" rounded-xl  ">
+        -->
+            <img id="meme" src="img/{{.}}" alt="meme" class=" rounded-xl">
+            <div id="desc" class="flex items-end justify-end ">
+                <div class=" flex items-end my-2   border-white ">
+                    <div id="emoji" class="  text-4xl">🥸</div>
+                    <div id="name" class=" shadowsmal  ml-1 text-white text-2xl">emil6969🔥</div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div id="bgAccount"
+
+
+
+    <div id="bgAccount" hidden
         class="fixed top-0 right-0 h-screen w-screen  flex  justify-center items-center backdrop-blur-xs text-white ">
-        <div id="windowAccount" class=" w-90 bg-prime  rounded-xl  p-2 " open>
+        <div id="windowAccount" class=" w-90 bg-prime  rounded-xl  p-2 border " open>
 
             <div class="  text-white font-bold text-xl mt-3  mx-4">Anmelden</div>
 

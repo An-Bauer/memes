@@ -21,16 +21,17 @@ func RegisterUser(username, password string) error {
 	return nil
 }
 
-func LoginUser(username, password string) error {
+func LoginUser(username, password string) (bool, error) {
 	hash, err := db.GetHash(username)
 	if err != nil {
-		return err
+		return false, err
 	}
 
 	err = bcrypt.CompareHashAndPassword(hash, []byte(password))
 	if err != nil {
-		return fmt.Errorf("ERROR: validating hash failed (username:%s, password:%s, error: %v)", username, password, err)
+		return false, nil
+		//return fmt.Errorf("ERROR: validating hash failed (username:%s, password:%s, error: %v)", username, password, err)
 	}
 
-	return nil
+	return true, nil
 }

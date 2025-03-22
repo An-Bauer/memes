@@ -8,14 +8,14 @@ function addRegister() {
 
     register.addEventListener("input", function (event) {
         let error = false
-        let errorMsg = ""
+        let msg = "registrieren"
 
         password2.classList.remove('wrong');
         if (password1.value != password2.value) {
             error = true
             if (password2.value != "") {
                 password2.classList.add('wrong');
-                errorMsg = "Passwörter ungleich"
+                msg = "Passwörter ungleich"
             }
         }
 
@@ -24,7 +24,7 @@ function addRegister() {
             error = true
             if (password1.value != "") {
                 password1.classList.add('wrong');
-                errorMsg = "Passwort ungültig"
+                msg = "Passwort ungültig"
             }
         }
 
@@ -33,34 +33,31 @@ function addRegister() {
             error = true
             if (username.value != "") {
                 username.classList.add('wrong');
-                errorMsg = "Benutzername ungültig"
+                msg = "Benutzername ungültig"
             }
         }
 
         reg.disabled = error
-        console.log(error)
-        msg.innerHTML = errorMsg
+        reg.innerHTML = msg
     });
 } addRegister()
-
 
 function addLogin() {
     let login = document.getElementById("login")
     let username = document.getElementById("logUsername")
     let password = document.getElementById("logPassword")
-    let msg = document.getElementById("logMsg")
-    let reg = document.getElementById("logBut")
+    let log = document.getElementById("logBut")
 
     login.addEventListener("input", function (event) {
         let error = false
-        let errorMsg = ""
+        let msg = "anmelden"
 
         password.classList.remove('wrong');
         if (!(/^[a-zA-Z0-9]{4,20}$/).test(password.value)) {
             error = true
             if (password.value != "") {
                 password.classList.add('wrong');
-                errorMsg = "Passwort ungültig"
+                msg = "Passwort ungültig"
             }
         }
 
@@ -69,49 +66,89 @@ function addLogin() {
             error = true
             if (username.value != "") {
                 username.classList.add('wrong');
-                errorMsg = "Benutzername ungültig"
+                msg = "Benutzername ungültig"
             }
         }
 
-        reg.disabled = error
-        msg.innerHTML = errorMsg
+        log.disabled = error
+        log.innerHTML = msg
     });
 } addLogin()
 
+async function register(e) {
+    try {
+        const regBut = document.getElementById("regBut")
 
-function regFunc(e) {
-    const formData = new URLSearchParams();
-    formData.append("user", document.getElementById("regUsername").value);
-    formData.append("password", document.getElementById("regPassword1").value);
+        const formData = new URLSearchParams();
+        formData.append("user", document.getElementById("regUsername").value);
+        formData.append("password", document.getElementById("regPassword1").value);
+        const request = {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: formData.toString(),
+        }
+        const response = await fetch("/api/register", request)
 
-    fetch("/api/register", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: formData.toString()
-    })
-        .then(response => console.log(response.text().then()))
-        .catch(error => console.error("Error:", error));
+        if (!response.ok) {
+            regBut.innerHTML = "interner Fehler"
+            console.log("server error")
+            return
+        }
 
-} document.getElementById("regBut").addEventListener("click", regFunc)
+        const text = await response.text()
 
-function logFunc(e) {
-    const formData = new URLSearchParams();
-    formData.append("user", document.getElementById("logUsername").value);
-    formData.append("password", document.getElementById("logPassword").value);
+        if (text == "user already exists") {
+            regBut.innerHTML = "Benutzer existiert schon"
+        } else if (text == "success") {
+            window.location.reload();
+        } else {
+            regBut.innerHTML = "interner Fehler"
+            console.log(text)
+            console.log("invalid response")
+        }
+    } catch (error) {
+        logBut.innerHTML = "kein Internet"
+        console.log(error)
+    }
+} document.getElementById("regBut").addEventListener("click", register)
 
-    fetch("/api/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: formData.toString()
-    })
-        .then(data => console.log(data))
-        .catch(error => console.error("Error:", error));
+async function login(e) {
+    try {
+        const logBut = document.getElementById("logBut")
 
-} document.getElementById("logBut").addEventListener("click", logFunc)
+        const formData = new URLSearchParams();
+        formData.append("user", document.getElementById("logUsername").value);
+        formData.append("password", document.getElementById("logPassword").value);
+        const request = {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: formData.toString(),
+        }
+        const response = await fetch("/api/login", request)
+
+        if (!response.ok) {
+            logBut.innerHTML = "interner Fehler"
+            console.log("server error")
+            return
+        }
+
+        const text = await response.text()
+
+        if (text == "user dosn't exist") {
+            logBut.innerHTML = "Benutzer existiert nicht"
+        } else if (text == "wrong password") {
+            logBut.innerHTML = "Passwort falsch"
+        } else if (text == "success") {
+            window.location.reload();
+        } else {
+            logBut.innerHTML = "interner Fehler"
+            console.log("invalid response")
+        }
+    } catch (error) {
+        logBut.innerHTML = "kein Internet"
+        console.log(error)
+    }
+} document.getElementById("logBut").addEventListener("click", login)
 
 function closeAccount(e) {
     if (e.target == this) {
