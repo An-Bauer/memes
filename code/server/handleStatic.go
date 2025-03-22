@@ -19,6 +19,7 @@ func handleIcon(w http.ResponseWriter, r *http.Request) {
 func handleStatic(w http.ResponseWriter, r *http.Request) {
 	valid, username, err := users.CheckToken(r)
 	fmt.Println(valid, username, err)
+
 	file := r.PathValue("file")
 	fmt.Printf("LOG: handeling static (file:%s)\n", file)
 

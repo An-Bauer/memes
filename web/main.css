@@ -17,3 +17,7 @@
 .wrong {
   @apply text-red-500;
 }
+
+.shadow {
+  text-shadow: 3px 3px #c409d8;
+}

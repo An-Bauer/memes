@@ -67,5 +67,6 @@ func handleLogin(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Printf("LOG: handeled login (username:%s)\n", username)
-	fmt.Fprint(w, "test") // important
+	http.ServeFile(w, r, "E:/InProgress/memes/web/upload.html")
+	//fmt.Fprint(w, "test") // important
 }

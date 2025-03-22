@@ -1,18 +1,15 @@
 package users
 
 import (
+	"crypto/rand"
 	"memes/code/db"
-	"memes/code/encode"
 	"net/http"
 )
 
 func HandleNewToken(username string, w http.ResponseWriter) error {
-	token, err := encode.RandomeString(20)
-	if err != nil {
-		return err
-	}
+	token := rand.Text()
 
-	err = db.UpdateToken(username, token)
+	err := db.UpdateToken(username, token)
 	if err != nil {
 		return err
 	}

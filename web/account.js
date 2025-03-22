@@ -91,7 +91,7 @@ function regFunc(e) {
         },
         body: formData.toString()
     })
-        .then(data => console.log(data))
+        .then(response => console.log(response.text().then()))
         .catch(error => console.error("Error:", error));
 
 } document.getElementById("regBut").addEventListener("click", regFunc)
